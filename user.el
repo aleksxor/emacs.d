@@ -39,10 +39,18 @@
 ;;; PATH
 
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin"))
-      (ghcup-path (expand-file-name "~/.ghcup/bin")))
-  (setenv "PATH" (concat ghcup-path path-separator my-cabal-path path-separator (getenv "PATH")))
+      (ghcup-path (expand-file-name "~/.ghcup/bin"))
+      (npm-bin-path (expand-file-name "~/.nvm/versions/node/v12.16.1/bin"))
+      (yarn-global-path (expand-file-name "~/.config/yarn/global/node_modules/.bin")))
+      (setenv "PATH" (concat ghcup-path path-separator
+			     my-cabal-path path-separator
+			     npm-bin-path path-separator
+			     yarn-global-path path-separator
+			     (getenv "PATH")))
   (add-to-list 'exec-path ghcup-path)
-  (add-to-list 'exec-path my-cabal-path))
+  (add-to-list 'exec-path my-cabal-path)
+  (add-to-list 'exec-path npm-bin-path)
+  (add-to-list 'exec-path yarn-global-path))
 
 ;;; Magit
 
@@ -57,6 +65,11 @@
   :ensure t
   :config
   (winum-mode))
+
+;; format-all
+
+(use-package format-all
+  :ensure t)
 
 ;;; transpose lines
 
@@ -299,16 +312,44 @@
 
 ;;; Purescript:
 
-;; (use-package psc-ide
-;;   :ensure t)
+(use-package psci
+  :ensure t
+  :init
+  (add-hook 'purescript-mode-hook 'inferior-psci-mode))
 
-;; (add-hook 'purescript-mode-hook
-;; 	  (lambda ()
-;; 	    (psc-ide-mode)
-;; 	    (company-mode)
-;; 	    (flycheck-mode)
-;; 	    (turn-on-purescript-indentation)))
-	     
+(use-package purescript-mode
+  :ensure t
+  :init
+  (add-hook 'purescript-mode-hook 'turn-on-purescript-identation))
+
+(use-package psc-ide
+  :ensure t
+  :init
+  (add-hook 'purescript-mode-hook
+	    (lambda ()
+	      (psc-ide-mode)
+	      (company-mode)
+	      (flycheck-mode)
+	      (inferior-psci-mode)
+	      (turn-on-purescript-indentation)))
+  :config
+  (setq psc-ide-rebuild-on-save t))
+
+;;; repl-toggle
+
+(use-package repl-toggle
+  :ensure t
+  :config
+  (add-to-list 'rtog/mode-repl-alist '(purescript-mode . psci)))
+  
+;; Terraform
+
+(use-package terraform-mode
+  :ensure t)
+
+(use-package company-terraform
+  :ensure t
+  :init)
 
 ;; font
 
@@ -318,10 +359,15 @@
 
 ;; Color theme
 
-(use-package darktooth-theme
+;; (use-package darktooth-theme
+;;   :ensure t
+;;   :init
+;;   (load-theme 'darktooth t))
+
+(use-package nord-theme
   :ensure t
   :init
-  (load-theme 'darktooth t))
+  (load-theme 'nord t))
 
 ;; no menu bar
 

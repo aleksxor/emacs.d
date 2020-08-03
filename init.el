@@ -26,7 +26,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (winum use-package rainbow-delimiters neotree multiple-cursors magit hindent flycheck-color-mode-line direnv darktooth-theme dante counsel-projectile attrap))))
+    (repl-toggle psci winum use-package purescript-mode psc-ide nordless-theme nord-theme neotree multiple-cursors magit hindent format-all flycheck-color-mode-line direnv darktooth-theme dante counsel-projectile company-terraform company-ghci company-ghc attrap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
