@@ -13,6 +13,14 @@
 
 (setq minibuffer-scroll-window t)
 
+;; mac os key bindings
+
+(when (eq system-type 'darwin) ;; mac specific settings
+  (setq mac-option-modifier 'alt)
+  (setq mac-command-modifier 'control)
+  ;; (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
+  )
+
 ;; save tags file without prompt
 
 (setq-default tags-revert-without-query t)
@@ -40,7 +48,7 @@
 
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin"))
       (ghcup-path (expand-file-name "~/.ghcup/bin"))
-      (npm-bin-path (expand-file-name "~/.nvm/versions/node/v12.16.1/bin"))
+      (npm-bin-path (expand-file-name "~/.nvm/versions/node/v12.18.2/bin"))
       (yarn-global-path (expand-file-name "~/.config/yarn/global/node_modules/.bin")))
       (setenv "PATH" (concat ghcup-path path-separator
 			     my-cabal-path path-separator
@@ -355,7 +363,7 @@
 
 (set-face-attribute
  'default
-  nil :family "JetBrains Mono" :foundry "CTDB" :slant 'normal :weight 'normal :height 113 :width 'normal)
+  nil :family "JetBrains Mono" :slant 'normal :weight 'normal :height 141 :width 'normal)
 
 ;; Color theme
 
