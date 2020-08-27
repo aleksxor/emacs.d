@@ -1,9 +1,6 @@
-*.elc
-*.el~
-elpa/
-ac-comphist.dat
-auto-save-list/
-cider-history
-snippets/
-request/
-eshell/
+# ignore everything
+*
+# whitelist user.el, init.el
+!.gitignore
+!user.el
+!init.el

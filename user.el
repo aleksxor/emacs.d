@@ -363,7 +363,7 @@
 
 (set-face-attribute
  'default
-  nil :family "JetBrains Mono" :slant 'normal :weight 'normal :height 141 :width 'normal)
+  nil :family "Fira Code" :slant 'normal :weight 'normal :height 110 :width 'normal)
 
 ;; Color theme
 
